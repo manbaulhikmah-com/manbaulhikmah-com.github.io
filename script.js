@@ -131,9 +131,10 @@ function parseCSV(text){
 
 function fetchSheet(url){
   if(!url) return Promise.resolve([]);
-  const separator=url.includes("?")?"&":"?";
-  const requestUrl=url+separator+"_nocache="+Date.now();
-  return fetch(requestUrl,{
+
+  // Google Sheets CSV sometimes keeps a browser request pending.
+  // Use a short timeout and retry once without the cache-buster.
+  const request=(requestUrl)=>fetch(requestUrl,{
     method:"GET",
     cache:"no-store",
     credentials:"omit",
@@ -148,6 +149,17 @@ function fetchSheet(url){
     }
     return parseCSV(text);
   });
+
+  const direct=url; // keep the exact public CSV URL
+  const cacheBust=url+(url.includes("?")?"&":"?")+"_nocache="+Date.now();
+
+  const timeout=(promise,ms)=>Promise.race([
+    promise,
+    new Promise((_,reject)=>setTimeout(()=>reject(Error("TIMEOUT")),ms))
+  ]);
+
+  return timeout(request(cacheBust),8000)
+    .catch(()=>timeout(request(direct),10000));
 }
 
 function val(o,...keys){
@@ -286,9 +298,9 @@ async function loadOneSheet(configKey, renderFn, elementId, label){
   try{
     const data=await fetchSheet(SHEET_CONFIG[configKey].url);
     renderFn(data);
-    console.log(`[V13] ${label}:`,data.length,"baris");
+    console.log(`[V14] ${label}:`,data.length,"baris");
   }catch(e){
-    console.error(`[V13] ${label} gagal:`,e);
+    console.error(`[V14] ${label} gagal:`,e);
     const el=document.getElementById(elementId);
     if(el) el.innerHTML=`<div class="sheet-status sheet-error">Data ${label} belum dapat dimuat. Periksa publikasi CSV sheet tersebut.</div>`;
   }
