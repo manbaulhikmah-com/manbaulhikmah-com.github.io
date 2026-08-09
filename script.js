@@ -193,6 +193,26 @@ function showInstitution(x){
   if(m){m.classList.add("show");m.setAttribute("aria-hidden","false");}
 }
 
+
+/* V14: Google Drive image links can be pasted directly into "gambar" columns. */
+function toImageUrl(url){
+  const raw = String(url || "").trim();
+  if (!raw) return "";
+
+  // https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+  let m = raw.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);
+  if (m) return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
+
+  // https://drive.google.com/open?id=FILE_ID or other Drive URL with ?id=
+  m = raw.match(/[?&]id=([^&#]+)/i);
+  if (m && /drive\.google\.com/i.test(raw)) {
+    return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
+  }
+
+  // Already a direct image URL.
+  return raw;
+}
+
 /* ---------- SHEET 2: BERITA ---------- */
 function renderNews(data){
   const el=document.getElementById("newsGrid");
@@ -203,7 +223,7 @@ function renderNews(data){
   }
   el.innerHTML=data.slice(0,12).map(x=>{
     const title=val(x,"judul","judul berita","title")||"Tanpa judul";
-    const image=val(x,"gambar","foto","image","url gambar");
+    const image=toImageUrl(val(x,"gambar","foto","image","url gambar"));
     const body=val(x,"isi","isi berita","deskripsi","description");
     const link=val(x,"link","url");
     return `<article class="news-card-dynamic">
@@ -251,7 +271,7 @@ function renderGallery(data){
     return;
   }
   el.innerHTML=data.slice(0,20).map(x=>{
-    const image=val(x,"gambar","foto","image","url","url gambar");
+    const image=toImageUrl(val(x,"gambar","foto","image","url","url gambar"));
     const title=val(x,"judul","keterangan","caption","title");
     if(!image) return "";
     return `<figure class="gallery-item-dynamic">
