@@ -32,3 +32,29 @@
 @media(max-width:1100px){.institution-data-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:800px){.institution-data-grid{grid-template-columns:1fr 1fr}.institution-modal-card{padding:28px 20px}}
 @media(max-width:520px){.institution-data-grid{grid-template-columns:1fr}}
+
+/* V11 - Google Sheets framework */
+.dynamic-grid{grid-template-columns:repeat(3,1fr)}
+.news-card-dynamic{background:#fff;border:1px solid #e0e8e3;border-radius:16px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.05)}
+.news-card-dynamic img{width:100%;height:190px;object-fit:cover;display:block}
+.news-card-body{padding:20px}
+.news-card-body>span,.agenda-card-dynamic>div>span{font-size:11px;letter-spacing:1.5px;color:#a8750d;font-weight:900}
+.news-card-body small{display:block;color:#7c8983;margin:7px 0}
+.news-card-body h3{color:#103f32;margin:8px 0}
+.news-card-body p{color:#65736d;line-height:1.6}
+.news-card-body a{color:#08724e;font-weight:800;text-decoration:none}
+.news-empty,.agenda-empty,.gallery-empty{padding:35px;border:1px dashed #ccd9d2;border-radius:16px;background:#fff;text-align:center;color:#65736d}
+.news-empty h3,.agenda-empty h3{color:#103f32}
+.agenda-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.agenda-card-dynamic{display:grid;grid-template-columns:130px 1fr;gap:20px;background:#fff;border:1px solid #e0e8e3;border-radius:16px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.04)}
+.agenda-date{display:flex;flex-direction:column;justify-content:center;align-items:center;background:#edf5f0;border-radius:12px;padding:15px;color:#08724e;text-align:center}
+.agenda-date b{font-size:20px}
+.agenda-date small{margin-top:5px;color:#65736d}
+.agenda-card-dynamic h3{color:#103f32;margin:8px 0}
+.agenda-card-dynamic p,.agenda-card-dynamic div{color:#65736d}
+.dynamic-gallery{display:grid!important;grid-template-columns:repeat(3,1fr);gap:16px}
+.gallery-item-dynamic{margin:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e0e8e3}
+.gallery-item-dynamic img{width:100%;height:230px;object-fit:cover;display:block}
+.gallery-item-dynamic figcaption{padding:10px 12px;color:#103f32;font-weight:700}
+@media(max-width:900px){.dynamic-grid{grid-template-columns:1fr 1fr}.agenda-grid{grid-template-columns:1fr}.dynamic-gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.dynamic-grid,.dynamic-gallery{grid-template-columns:1fr}.agenda-card-dynamic{grid-template-columns:1fr}}

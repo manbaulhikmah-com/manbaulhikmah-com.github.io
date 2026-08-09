@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Website resmi Yayasan Manbaul Hikmah, Brebes.">
 <title>Yayasan Manbaul Hikmah | Brebes</title>
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 
@@ -35,6 +35,7 @@
       <a href="#lembaga">LEMBAGA</a>
       <a href="#program">PROGRAM</a>
       <a href="#berita">BERITA</a>
+      <a href="#agenda">AGENDA</a>
       <a href="#galeri">GALERI</a>
       <a href="#kontak">KONTAK</a>
       <a class="psb" href="#psb">PSB 2026<small>DAFTAR SEKARANG</small></a>
@@ -116,14 +117,35 @@
 </section>
 
 <section id="berita" class="section">
-  <div class="container"><div class="section-title"><div class="eyebrow">INFORMASI</div><h2>Berita &amp; Kegiatan</h2><p>Tempat untuk berita, pengumuman dan agenda terbaru yayasan.</p></div>
-  <div class="news-grid"><article><span>KEGIATAN</span><h3>Pengajian &amp; Pembinaan Keagamaan</h3><p>Ruang untuk menampilkan dokumentasi dan informasi kegiatan yayasan.</p><a href="#kontak">Baca selengkapnya →</a></article><article><span>PENDIDIKAN</span><h3>Aktivitas Santri &amp; Siswa</h3><p>Ruang untuk menampilkan kegiatan belajar, prestasi dan agenda pendidikan.</p><a href="#kontak">Baca selengkapnya →</a></article><article id="psb"><span>PSB</span><h3>Penerimaan Peserta Didik Baru</h3><p>Informasi pendaftaran akan tersedia di halaman ini.</p><a href="#kontak">Info pendaftaran →</a></article></div>
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">INFORMASI</div>
+      <h2>Berita &amp; Pengumuman</h2>
+      <p>Berita dan pengumuman dapat dikelola dari Google Sheets.</p>
+    </div>
+    <div id="newsGrid" class="news-grid dynamic-grid"></div>
+  </div>
+</section>
+
+<section id="agenda" class="section soft">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">JADWAL</div>
+      <h2>Agenda Kegiatan</h2>
+      <p>Jadwal kegiatan yayasan dan lembaga dapat dikelola dari Google Sheets.</p>
+    </div>
+    <div id="agendaGrid" class="agenda-grid"></div>
   </div>
 </section>
 
 <section id="galeri" class="section soft">
-  <div class="container"><div class="section-title"><div class="eyebrow">DOKUMENTASI</div><h2>Galeri Kegiatan</h2><p>Foto asli pondok dan kegiatan dapat ditambahkan kapan saja.</p></div>
-  <div class="gallery"><div>FOTO KEGIATAN 01</div><div>FOTO KEGIATAN 02</div><div>FOTO KEGIATAN 03</div><div>FOTO KEGIATAN 04</div><div>FOTO KEGIATAN 05</div><div>FOTO KEGIATAN 06</div></div>
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">DOKUMENTASI</div>
+      <h2>Galeri Kegiatan</h2>
+      <p>Foto kegiatan dapat dikelola dari Google Sheets.</p>
+    </div>
+    <div id="galleryGrid" class="gallery dynamic-gallery"></div>
   </div>
 </section>
 
@@ -153,6 +175,6 @@
   </article>
 </div>
 <footer><div class="container footer"><b>Yayasan Manbaul Hikmah</b><span>Berilmu • Berakhlak • Mandiri</span><span>© <span id="year"></span></span></div></footer>
-<script src="script.js?v=10"></script>
+<script src="script.js?v=12"></script>
 </body>
 </html>
