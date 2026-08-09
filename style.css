@@ -58,3 +58,7 @@
 .gallery-item-dynamic figcaption{padding:10px 12px;color:#103f32;font-weight:700}
 @media(max-width:900px){.dynamic-grid{grid-template-columns:1fr 1fr}.agenda-grid{grid-template-columns:1fr}.dynamic-gallery{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.dynamic-grid,.dynamic-gallery{grid-template-columns:1fr}.agenda-card-dynamic{grid-template-columns:1fr}}
+
+/* V13 sheet loading states */
+.sheet-status{padding:30px;border:1px dashed #ccd9d2;border-radius:16px;background:#fff;text-align:center;color:#65736d}
+.sheet-error{color:#9a5b16;background:#fffaf0;border-color:#e4c98d}
