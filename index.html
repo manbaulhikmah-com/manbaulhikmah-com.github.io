@@ -44,8 +44,17 @@
 
 <main>
 <section id="beranda" class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-slider" aria-label="Galeri utama Yayasan Manbaul Hikmah">
+    <div class="hero-slide is-active" style="background-image:url("hero-1.jpg")"></div>
+    <div class="hero-slide" style="background-image:url("hero-2.jpg")"></div>
+    <div class="hero-slide" style="background-image:url("hero-3.jpg")"></div>
+  </div>
   <div class="hero-overlay"></div>
+  <div class="hero-dots" aria-label="Pilih gambar hero">
+    <button class="hero-dot active" aria-label="Gambar 1"></button>
+    <button class="hero-dot" aria-label="Gambar 2"></button>
+    <button class="hero-dot" aria-label="Gambar 3"></button>
+  </div>
   <div class="container hero-inner">
     <div class="hero-logo-box">
       <img src="logo-yayasan.png" alt="Logo Yayasan Manbaul Hikmah">
