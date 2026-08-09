@@ -30,7 +30,7 @@ showSlide(0);
 restartSlider();
 
 
-/* V13 - Google Sheets: robust Sheet 1-4 reader */
+/* V14 - Google Drive image links; V13 design preserved */
 const SHEET_CONFIG = {
   // Sheet 1: Lembaga — SUDAH AKTIF
   lembaga: {
@@ -131,10 +131,9 @@ function parseCSV(text){
 
 function fetchSheet(url){
   if(!url) return Promise.resolve([]);
-
-  // Google Sheets CSV sometimes keeps a browser request pending.
-  // Use a short timeout and retry once without the cache-buster.
-  const request=(requestUrl)=>fetch(requestUrl,{
+  const separator=url.includes("?")?"&":"?";
+  const requestUrl=url+separator+"_nocache="+Date.now();
+  return fetch(requestUrl,{
     method:"GET",
     cache:"no-store",
     credentials:"omit",
@@ -149,17 +148,6 @@ function fetchSheet(url){
     }
     return parseCSV(text);
   });
-
-  const direct=url; // keep the exact public CSV URL
-  const cacheBust=url+(url.includes("?")?"&":"?")+"_nocache="+Date.now();
-
-  const timeout=(promise,ms)=>Promise.race([
-    promise,
-    new Promise((_,reject)=>setTimeout(()=>reject(Error("TIMEOUT")),ms))
-  ]);
-
-  return timeout(request(cacheBust),8000)
-    .catch(()=>timeout(request(direct),10000));
 }
 
 function val(o,...keys){
@@ -206,23 +194,48 @@ function showInstitution(x){
 }
 
 
-/* V14: Google Drive image links can be pasted directly into "gambar" columns. */
+/* V14: paste normal Google Drive sharing links into the "gambar" column. */
 function toImageUrl(url){
   const raw = String(url || "").trim();
   if (!raw) return "";
 
-  // https://drive.google.com/file/d/FILE_ID/view?usp=sharing
   let m = raw.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);
   if (m) return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
 
-  // https://drive.google.com/open?id=FILE_ID or other Drive URL with ?id=
   m = raw.match(/[?&]id=([^&#]+)/i);
   if (m && /drive\.google\.com/i.test(raw)) {
     return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
   }
 
-  // Already a direct image URL.
   return raw;
+}
+
+/* Never leave a section stuck on "Memuat..." forever. */
+function fetchSheetV14(url){
+  if(!url) return Promise.resolve([]);
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(()=>controller.abort(), 9000);
+
+  return fetch(url,{
+    method:"GET",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
+    signal:controller.signal
+  })
+  .then(r=>{
+    if(!r.ok) throw Error("HTTP "+r.status);
+    return r.text();
+  })
+  .then(text=>{
+    if(!text.trim()) return [];
+    if(/^\s*<(?:!doctype\s+)?html/i.test(text)){
+      throw Error("URL bukan CSV publik");
+    }
+    return parseCSV(text);
+  })
+  .finally(()=>clearTimeout(timeoutId));
 }
 
 /* ---------- SHEET 2: BERITA ---------- */
@@ -296,13 +309,13 @@ function renderGallery(data){
 async function loadOneSheet(configKey, renderFn, elementId, label){
   showLoadState(elementId,`Memuat ${label}...`);
   try{
-    const data=await fetchSheet(SHEET_CONFIG[configKey].url);
+    const data=await fetchSheetV14(SHEET_CONFIG[configKey].url);
     renderFn(data);
     console.log(`[V14] ${label}:`,data.length,"baris");
   }catch(e){
     console.error(`[V14] ${label} gagal:`,e);
     const el=document.getElementById(elementId);
-    if(el) el.innerHTML=`<div class="sheet-status sheet-error">Data ${label} belum dapat dimuat. Periksa publikasi CSV sheet tersebut.</div>`;
+    if(el) el.innerHTML=`<div class="sheet-status sheet-error">Data ${label} belum dapat dimuat. Periksa apakah tab ${label} sudah dipublikasikan sebagai CSV.</div>`;
   }
 }
 
