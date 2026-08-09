@@ -30,7 +30,7 @@ showSlide(0);
 restartSlider();
 
 
-/* V14 - Google Drive image links; V13 design preserved */
+/* V13 - Google Sheets: robust Sheet 1-4 reader */
 const SHEET_CONFIG = {
   // Sheet 1: Lembaga — SUDAH AKTIF
   lembaga: {
@@ -193,49 +193,22 @@ function showInstitution(x){
   if(m){m.classList.add("show");m.setAttribute("aria-hidden","false");}
 }
 
-
-/* V14: paste normal Google Drive sharing links into the "gambar" column. */
+/* V14: Google Drive image links */
 function toImageUrl(url){
   const raw = String(url || "").trim();
   if (!raw) return "";
 
+  // Drive sharing: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
   let m = raw.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);
-  if (m) return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
+  if (m) return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(m[1]) + "&sz=w1600";
 
+  // Drive links using ?id=FILE_ID
   m = raw.match(/[?&]id=([^&#]+)/i);
   if (m && /drive\.google\.com/i.test(raw)) {
-    return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(m[1]);
+    return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(m[1]) + "&sz=w1600";
   }
 
   return raw;
-}
-
-/* Never leave a section stuck on "Memuat..." forever. */
-function fetchSheetV14(url){
-  if(!url) return Promise.resolve([]);
-
-  const controller = new AbortController();
-  const timeoutId = setTimeout(()=>controller.abort(), 9000);
-
-  return fetch(url,{
-    method:"GET",
-    mode:"cors",
-    cache:"no-store",
-    credentials:"omit",
-    signal:controller.signal
-  })
-  .then(r=>{
-    if(!r.ok) throw Error("HTTP "+r.status);
-    return r.text();
-  })
-  .then(text=>{
-    if(!text.trim()) return [];
-    if(/^\s*<(?:!doctype\s+)?html/i.test(text)){
-      throw Error("URL bukan CSV publik");
-    }
-    return parseCSV(text);
-  })
-  .finally(()=>clearTimeout(timeoutId));
 }
 
 /* ---------- SHEET 2: BERITA ---------- */
@@ -309,13 +282,13 @@ function renderGallery(data){
 async function loadOneSheet(configKey, renderFn, elementId, label){
   showLoadState(elementId,`Memuat ${label}...`);
   try{
-    const data=await fetchSheetV14(SHEET_CONFIG[configKey].url);
+    const data=await fetchSheet(SHEET_CONFIG[configKey].url);
     renderFn(data);
-    console.log(`[V14] ${label}:`,data.length,"baris");
+    console.log(`[V13] ${label}:`,data.length,"baris");
   }catch(e){
-    console.error(`[V14] ${label} gagal:`,e);
+    console.error(`[V13] ${label} gagal:`,e);
     const el=document.getElementById(elementId);
-    if(el) el.innerHTML=`<div class="sheet-status sheet-error">Data ${label} belum dapat dimuat. Periksa apakah tab ${label} sudah dipublikasikan sebagai CSV.</div>`;
+    if(el) el.innerHTML=`<div class="sheet-status sheet-error">Data ${label} belum dapat dimuat. Periksa publikasi CSV sheet tersebut.</div>`;
   }
 }
 
