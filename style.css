@@ -63,20 +63,18 @@
 .sheet-status{padding:30px;border:1px dashed #ccd9d2;border-radius:16px;background:#fff;text-align:center;color:#65736d}
 .sheet-error{color:#9a5b16;background:#fffaf0;border-color:#e4c98d}
 
-/* V13 UPDATE - desktop header refinement */
-@media(min-width:1101px){
-  .nav-wrap{min-height:112px;gap:22px}
-  .brand{gap:14px;min-width:420px}
-  .brand img{width:92px;height:92px;flex-basis:92px}
-  .brand-text>span{font-size:22px;line-height:1}
-  .brand-text strong{font-size:40px;line-height:.95;letter-spacing:-1.4px}
-  .brand-text small{font-size:15px;margin-top:7px}
-  .nav{gap:20px}
-  .nav>a{font-size:13px}
-  .nav>a.active:after{bottom:-16px;height:2px}
-  .nav .psb{padding:8px 13px;border-radius:7px;font-size:13px;min-width:104px}
-  .nav .psb small{font-size:8px;margin-top:1px}
-  .inst-icon{font-size:24px}
-}
 
-@media(max-width:800px){.inst-icon{font-size:22px}}
+/* V13 APPROVED HEADER - desktop reference match */
+@media (min-width:1101px){
+  .nav-wrap{min-height:145px;gap:22px}
+  .brand{gap:16px}
+  .brand img{width:112px;height:112px;flex:0 0 112px}
+  .brand-text>span{font-size:28px;line-height:1}
+  .brand-text strong{font-size:44px;line-height:.98;letter-spacing:-1.8px}
+  .brand-text small{font-size:17px;margin-top:8px;color:#d2870b}
+  .nav{gap:25px}
+  .nav>a{font-size:13px}
+  .nav>a.active:after{bottom:-18px}
+  .nav .psb{background:#fff;color:#103c30;border:1.5px solid #087345;border-radius:6px;padding:8px 13px;font-size:14px;line-height:1.2}
+  .nav .psb small{display:none}
+}
