@@ -63,5 +63,16 @@
 .sheet-status{padding:30px;border:1px dashed #ccd9d2;border-radius:16px;background:#fff;text-align:center;color:#65736d}
 .sheet-error{color:#9a5b16;background:#fffaf0;border-color:#e4c98d}
 
-/* V14 image fallback */
-.news-card-dynamic img,.gallery-item-dynamic img{background:#eef3f0}
+/* V13 DESKTOP HEADER FIX - only affects screens wider than 1100px */
+@media (min-width:1101px){
+  .nav-wrap{min-height:125px;gap:20px}
+  .brand{gap:14px}
+  .brand img{width:108px;height:108px;flex-basis:108px}
+  .brand-text>span{font-size:25px}
+  .brand-text strong{font-size:44px;letter-spacing:-1.7px}
+  .brand-text small{font-size:17px;margin-top:9px}
+  .nav{gap:22px}
+  .nav>a{font-size:13px}
+  .nav>a.active:after{bottom:-18px}
+  .nav .psb{padding:11px 16px;font-size:15px}
+}
