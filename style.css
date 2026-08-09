@@ -62,3 +62,6 @@
 /* V13 sheet loading states */
 .sheet-status{padding:30px;border:1px dashed #ccd9d2;border-radius:16px;background:#fff;text-align:center;color:#65736d}
 .sheet-error{color:#9a5b16;background:#fffaf0;border-color:#e4c98d}
+
+/* V14 image fallback */
+.news-card-dynamic img,.gallery-item-dynamic img{background:#eef3f0}
