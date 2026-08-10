@@ -196,3 +196,45 @@
     opacity: .72;
   }
 }
+
+
+
+/* V19 FIX: actual dynamic Google Sheets gallery carousel on mobile */
+@media (max-width: 767px) {
+  #galleryGrid.dynamic-gallery {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 14px !important;
+    padding: 4px 4px 18px !important;
+    margin-right: -4px !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #galleryGrid.dynamic-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  #galleryGrid.dynamic-gallery .gallery-item-dynamic {
+    flex: 0 0 82% !important;
+    width: 82% !important;
+    min-width: 82% !important;
+    margin: 0 !important;
+    scroll-snap-align: start;
+  }
+
+  #galleryGrid.dynamic-gallery .gallery-item-dynamic img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  #galleryGrid.dynamic-gallery .gallery-item-dynamic figcaption {
+    margin-top: 8px;
+  }
+}
