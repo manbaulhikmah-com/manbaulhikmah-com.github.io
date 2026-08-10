@@ -238,3 +238,100 @@
     margin-top: 8px;
   }
 }
+
+
+/* V20: professional centered footer */
+.site-footer {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center !important;
+  clear: both;
+}
+
+.site-footer-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto !important;
+  padding: 0 16px;
+  box-sizing: border-box;
+  text-align: center !important;
+}
+
+.site-footer p {
+  margin: 0 auto !important;
+  text-align: center !important;
+  line-height: 1.6;
+}
+
+.site-footer-credit {
+  display: none !important;
+}
+
+.footer-separator {
+  display: inline;
+  margin: 0 .35em;
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding: 20px 14px calc(22px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .site-footer p {
+    font-size: .78rem;
+  }
+
+  .footer-separator {
+    margin: 0 .2em;
+  }
+}
+
+
+/* V20: Galeri Kegiatan only — mobile horizontal swipe */
+@media (max-width: 767px) {
+  #gallery,
+  #galeri,
+  #galleryContainer,
+  #galeriContainer,
+  .gallery-section .gallery-grid,
+  .galeri-section .gallery-grid,
+  .gallery-section .gallery-container,
+  .galeri-section .gallery-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 14px !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 12px;
+  }
+
+  #gallery::-webkit-scrollbar,
+  #galeri::-webkit-scrollbar,
+  #galleryContainer::-webkit-scrollbar,
+  #galeriContainer::-webkit-scrollbar,
+  .gallery-section .gallery-grid::-webkit-scrollbar,
+  .galeri-section .gallery-grid::-webkit-scrollbar,
+  .gallery-section .gallery-container::-webkit-scrollbar,
+  .galeri-section .gallery-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  #gallery > *,
+  #galeri > *,
+  #galleryContainer > *,
+  #galeriContainer > *,
+  .gallery-section .gallery-grid > *,
+  .galeri-section .gallery-grid > *,
+  .gallery-section .gallery-container > *,
+  .galeri-section .gallery-container > * {
+    flex: 0 0 82% !important;
+    width: 82% !important;
+    max-width: 82% !important;
+    scroll-snap-align: start;
+  }
+}
