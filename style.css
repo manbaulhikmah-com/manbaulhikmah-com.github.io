@@ -136,3 +136,63 @@
   .brand-text strong{font-size:22px}
   .brand-text small{font-size:9px}
 }
+
+
+
+/* V18: mobile documentation carousel */
+@media (max-width: 767px) {
+  .gallery-grid,
+  .gallery-container,
+  .gallery-list,
+  .documentation-grid,
+  .dokumentasi-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+    padding: 4px 4px 14px;
+    scrollbar-width: none;
+  }
+
+  .gallery-grid::-webkit-scrollbar,
+  .gallery-container::-webkit-scrollbar,
+  .gallery-list::-webkit-scrollbar,
+  .documentation-grid::-webkit-scrollbar,
+  .dokumentasi-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-grid > *,
+  .gallery-container > *,
+  .gallery-list > *,
+  .documentation-grid > *,
+  .dokumentasi-grid > * {
+    flex: 0 0 82%;
+    width: 82%;
+    scroll-snap-align: start;
+  }
+
+  .site-footer {
+    margin-top: 36px;
+    padding: 22px 16px calc(24px + env(safe-area-inset-bottom));
+    text-align: center;
+  }
+
+  .site-footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .site-footer p {
+    margin: 4px 0;
+    line-height: 1.5;
+  }
+
+  .site-footer-credit {
+    font-size: .82rem;
+    opacity: .72;
+  }
+}
