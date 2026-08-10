@@ -78,3 +78,61 @@
   .nav .psb{background:#fff;color:#103c30;border:1.5px solid #087345;border-radius:6px;padding:8px 13px;font-size:14px;line-height:1.2}
   .nav .psb small{display:none}
 }
+
+/* V17 — Header & homepage refined to match the approved reference + Google Maps float */
+@media (min-width:1101px){
+  .topbar{min-height:56px}
+  .topbar-grid{min-height:56px;gap:26px}
+  .header{position:sticky;top:0}
+  .nav-wrap{min-height:145px;gap:28px}
+  .brand{gap:18px;flex:0 0 auto}
+  .brand img{width:112px;height:112px;flex:0 0 112px}
+  .brand-text>span{font-size:28px;line-height:1}
+  .brand-text strong{font-size:44px;line-height:.98;letter-spacing:-1.8px}
+  .brand-text small{font-size:17px;margin-top:8px}
+  .nav{gap:25px;flex:1;justify-content:flex-end}
+  .nav>a{font-size:13px;white-space:nowrap}
+  .nav>a.active:after{bottom:-18px}
+  .nav .psb{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#103c30;border:1.5px solid #087345;border-radius:6px;padding:8px 13px;font-size:14px;line-height:1.2}
+  .psb-icon{font-size:15px;color:#087345}
+  .hero{min-height:445px}
+  .hero-inner{min-height:445px;grid-template-columns:minmax(0,1fr) 360px;gap:42px;padding:34px 0 52px}
+  .hero-logo-box{display:none}
+  .hero-main{max-width:760px}
+  .hero-kicker{font-size:14px;letter-spacing:2px;margin-bottom:10px}
+  .hero-main h1{font-size:46px;line-height:.95}
+  .hero-main h1 b{font-size:64px}
+  .hero-main p{font-size:18px;line-height:1.55}
+  .quote{min-height:305px;border-radius:27px;padding:30px 24px}
+  .quote .arabic{font-size:23px}
+  .institutions-wrap{margin-top:-32px}
+  .institutions{gap:14px;padding:10px;border-radius:12px}
+  .institutions article{min-height:290px;padding:25px 22px 18px;text-align:left}
+  .circle{width:62px;height:62px;font-size:25px}
+  .inst-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .institutions h3{font-size:17px}
+}
+
+.inst-icon{display:grid;place-items:center;width:100%;height:100%}
+.inst-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+.floating-map{position:fixed;right:24px;bottom:99px;width:58px;height:58px;border-radius:50%;background:#fff;color:#0a734e;display:grid;place-items:center;z-index:51;box-shadow:0 8px 24px rgba(0,0,0,.20);border:3px solid #fff;transition:transform .2s ease,box-shadow .2s ease;text-decoration:none}
+.floating-map svg{width:31px;height:31px;fill:#0a734e}
+.floating-map span{position:absolute;right:68px;white-space:nowrap;background:#0a734e;color:#fff;font-size:12px;font-weight:800;padding:7px 10px;border-radius:7px;opacity:0;transform:translateX(5px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.floating-map:hover,.floating-map:focus-visible{transform:translateY(-2px);box-shadow:0 11px 28px rgba(0,0,0,.25)}
+.floating-map:hover span,.floating-map:focus-visible span{opacity:1;transform:translateX(0)}
+@media(max-width:800px){
+  .floating-wa{right:18px;bottom:18px;width:56px;height:56px}
+  .floating-wa svg{width:32px;height:32px}
+  .floating-map{right:18px;bottom:84px;width:48px;height:48px;border-width:2px}
+  .floating-map svg{width:26px;height:26px}
+  .floating-map span{display:none}
+  .hero-logo-box{display:none}
+  .hero-inner{padding-top:36px}
+}
+@media(max-width:520px){
+  .brand img{width:58px;height:58px;flex-basis:58px}
+  .brand-text>span{font-size:14px}
+  .brand-text strong{font-size:22px}
+  .brand-text small{font-size:9px}
+}
